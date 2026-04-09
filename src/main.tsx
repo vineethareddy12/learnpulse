@@ -9,26 +9,28 @@
 //   </StrictMode>,
 // )
 
-import { Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { store } from './store'
 import './index.css'
-import './i18n' // Initialize i18n
 
+// Permanent Loading Component
+const Loading = () => {
+  return (
+    <div style={{
+      height: '100vh',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: '24px',
+      fontWeight: 'bold'
+    }}>
+      Loading...
+    </div>
+  )
+}
+
+// Render ONLY Loading (App is never rendered)
 createRoot(document.getElementById('root')!).render(
-  <Provider store={store}>
-    <Suspense
-      fallback={
-        <div className="flex items-center justify-center min-h-screen text-xl font-semibold">
-          Loading...
-        </div>
-      }
-    >
-      {/* App intentionally not rendered */}
-      <div className="flex items-center justify-center min-h-screen text-xl font-semibold">
-        Loading...
-      </div>
-    </Suspense>
-  </Provider>
+  <Loading />
 )
+    
