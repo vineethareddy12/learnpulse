@@ -127,7 +127,7 @@ const SuperAdminLayout: React.FC = () => {
                     <button onClick={handleLogout} className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-surface-dark hover:bg-primary transition-all duration-300 font-black text-sm shadow-lg text-accent-white group">
                         <FaSignOutAlt className="group-hover:rotate-12 transition-transform" /> Logout
                     </button>
-                    <p className="text-[10px] text-center text-accent-gray mt-4 uppercase tracking-[0.2em] font-black"> EduTalks © 2025</p>
+                    <p className="text-[10px] text-center text-accent-gray mt-4 uppercase tracking-[0.2em] font-black"> LearnPulse © 2025</p>
                 </div>
             </div>
 

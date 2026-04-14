@@ -20,9 +20,9 @@ const Footer: React.FC = () => {
                         </p>
                         <div className="flex gap-3">
                             {[
-                                { icon: FaFacebookF, href: "https://www.facebook.com/people/Edutalks/61578676177087/" },
-                                { icon: FaInstagram, href: "https://www.instagram.com/edutalks_tech?igsh=MXZjcm5mcDB0MzNi" },
-                                { icon: FaLinkedinIn, href: "https://www.linkedin.com/company/edutalks-pvt-ltd/posts/?feedView=all" }
+                                { icon: FaFacebookF, href: "#" },
+                                { icon: FaInstagram, href: "#" },
+                                { icon: FaLinkedinIn, href: "#" }
                             ].map((social, i) => (
                                 <a
                                     key={i}
@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
                         <ul className="space-y-3 md:space-y-4">
                             <li><Link to="/privacy-policy" className="text-accent-gray text-xs md:text-sm font-bold hover:text-primary transition-colors tracking-wide">Privacy Policy</Link></li>
                             <li><Link to="/terms-and-conditions" className="text-accent-gray text-xs md:text-sm font-bold hover:text-primary transition-colors tracking-wide">Terms of Service</Link></li>
-                            <li><a href="mailto:contact@edutalks.tech" className="text-accent-gray text-xs md:text-sm font-bold hover:text-primary transition-colors tracking-wide">Contact Us</a></li>
+                            <li><a href="mailto:contact@learnpulse.tech" className="text-accent-gray text-xs md:text-sm font-bold hover:text-primary transition-colors tracking-wide">Contact Us</a></li>
                         </ul>
                     </div>
 
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
                                 <div className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-surface-light border border-white/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shadow-md shrink-0">
                                     <FaEnvelope size={14} />
                                 </div>
-                                <a href="mailto:contact@edutalks.tech" className="text-accent-gray text-[11px] md:text-sm font-medium hover:text-primary transition-colors break-all">contact@edutalks.tech</a>
+                                <a href="mailto:contact@learnpulse.tech" className="text-accent-gray text-[11px] md:text-sm font-medium hover:text-primary transition-colors break-all">contact@learnpulse.tech</a>
                             </li>
                             <li className="pt-2 w-full flex justify-center sm:justify-start">
                                 <a
@@ -101,7 +101,7 @@ const Footer: React.FC = () => {
                 {/* Bottom Bar */}
                 <div className="pt-8 md:pt-10 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6">
                     <p className="text-accent-gray text-[9px] md:text-[10px] font-black tracking-[0.4em] uppercase italic opacity-40 text-center sm:text-left leading-relaxed">
-                        © 2026 EDUTALKS LEARNING PVT. LTD. <br className="sm:hidden" /> • MADE WITH <span className="text-primary">❤</span> IN INDIA.
+                        © 2026 LEARNPULSE LEARNING PVT. LTD. <br className="sm:hidden" /> • MADE WITH <span className="text-primary">❤</span> IN INDIA.
                     </p>
                     <div className="flex gap-6 md:gap-8 text-[8px] md:text-[9px] font-black text-accent-gray uppercase tracking-[0.3em] italic opacity-40">
                         <span>All Rights Reserved</span>

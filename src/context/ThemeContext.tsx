@@ -11,7 +11,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [theme, setTheme] = React.useState<Theme>(() => {
-        const saved = localStorage.getItem('edutalks-theme');
+        const saved = localStorage.getItem('learnpulse-theme');
         return (saved as Theme) || 'dark'; // Default to dark for premium feel
     });
 
@@ -24,7 +24,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             root.classList.add('light');
             root.classList.remove('dark');
         }
-        localStorage.setItem('edutalks-theme', theme);
+        localStorage.setItem('learnpulse-theme', theme);
     }, [theme]);
 
     const toggleTheme = () => {
