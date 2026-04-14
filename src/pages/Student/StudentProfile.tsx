@@ -216,7 +216,7 @@ const StudentProfile: React.FC = () => {
                             </li>
                             <li className="flex items-center gap-5 group/item">
                                 <div className="bg-white/10 p-3 rounded-xl border border-white/20 group-hover/item:bg-white/20 transition-colors"><FaEnvelope size={14} /></div>
-                                <a href="mailto:contact@edutalksacademy.in" className="font-black italic tracking-widest text-[11px] text-white hover:text-white transition-colors">contact@edutalksacademy.in</a>
+                                <a href="mailto:contact@learnpulse.in" className="font-black italic tracking-widest text-[11px] text-white hover:text-white transition-colors">contact@learnpulse.in</a>
                             </li>
                         </ul>
                         <a

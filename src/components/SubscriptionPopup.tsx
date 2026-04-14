@@ -25,7 +25,7 @@ const SubscriptionPopup: React.FC<SubscriptionPopupProps> = ({ isOpen, onClose, 
 
                 <h2 className="text-3xl font-black text-accent-white mb-2">Premium Access</h2>
                 <p className="text-accent-gray mb-8 font-medium">
-                    {message || "Unlock exams, live classes, and tournaments with EduTalks Pro."}
+                    {message || "Unlock exams, live classes, and tournaments with LearnPulse Pro."}
                 </p>
 
                 <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-xl mb-8 flex items-center gap-3 text-left">

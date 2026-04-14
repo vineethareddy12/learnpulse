@@ -47,7 +47,7 @@ const PrivacyPolicy: React.FC = () => {
                             <h2 className="text-2xl lg:text-4xl font-black text-accent-white italic tracking-tight">Introduction</h2>
                         </div>
                         <p className="text-accent-gray leading-relaxed text-lg font-medium opacity-90">
-                            At <span className="text-primary font-bold italic">EduTalks Learning Pvt. Ltd.</span> ("EduTalks", "we", "us", or "our"), we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you use our live streaming platform, website, and related services.
+                            At <span className="text-primary font-bold italic">LearnPulse Learning Pvt. Ltd.</span> ("LearnPulse", "we", "us", or "our"), we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you use our live streaming platform, website, and related services.
                         </p>
                     </section>
 
@@ -158,7 +158,7 @@ const PrivacyPolicy: React.FC = () => {
                             If you have any questions about this Privacy Policy or our data practices, please reach out to our legal team.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                            <a href="mailto:contact@edutalks.tech" className="btn-primary min-w-[200px] py-4 text-[10px] font-black uppercase tracking-widest italic shadow-xl shadow-primary/20">
+                            <a href="mailto:contact@learnpulse.tech" className="btn-primary min-w-[200px] py-4 text-[10px] font-black uppercase tracking-widest italic shadow-xl shadow-primary/20">
                                 Email Legal Team
                             </a>
                             <a

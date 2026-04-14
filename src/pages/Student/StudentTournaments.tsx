@@ -383,7 +383,7 @@ const StudentTournaments: React.FC = () => {
                     <FaTrophy className="text-6xl text-yellow-500 mx-auto mb-4 relative z-10" />
                     <h3 className="text-2xl font-bold text-accent-white mb-2 relative z-10">Unlock Tournaments & Compete!</h3>
                     <p className="text-accent-gray mb-6 relative z-10">
-                        Join exciting tournaments, compete with students nationwide, and win amazing prizes with EduTalks Pro.
+                        Join exciting tournaments, compete with students nationwide, and win amazing prizes with LearnPulse Pro.
                     </p>
                     <button
                         onClick={() => navigate('/student/subscription')}

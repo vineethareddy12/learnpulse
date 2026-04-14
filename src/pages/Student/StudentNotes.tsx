@@ -149,7 +149,7 @@ const StudentNotes: React.FC = () => {
                                 Unlock <span className="text-yellow-500">Premium Notes</span>
                             </h3>
                             <p className="text-accent-gray text-lg font-medium max-w-2xl mx-auto mb-8 leading-relaxed">
-                                Get access to exclusive study materials, detailed guides, and premium resources with EduTalks Pro.
+                                Get access to exclusive study materials, detailed guides, and premium resources with LearnPulse Pro.
                             </p>
                             <div className="flex justify-center gap-4">
                                 <Link

@@ -207,7 +207,7 @@ const StudentClasses: React.FC = () => {
                                     Unlock Your <span className="text-yellow-500">Full Potential</span>
                                 </h3>
                                 <p className="text-accent-gray text-lg font-medium max-w-2xl mx-auto mb-8 leading-relaxed">
-                                    Subscribe to <strong>EduTalks Pro</strong> to access unlimited live classes, exclusive exams, and compete in global tournaments. Don't settle for less.
+                                    Subscribe to <strong>LearnPulse Pro</strong> to access unlimited live classes, exclusive exams, and compete in global tournaments. Don't settle for less.
                                 </p>
                                 <div className="flex justify-center gap-4">
                                     <Link

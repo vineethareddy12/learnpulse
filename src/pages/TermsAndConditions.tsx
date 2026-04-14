@@ -47,7 +47,7 @@ const TermsAndConditions: React.FC = () => {
                             <h2 className="text-2xl lg:text-4xl font-black text-accent-white italic tracking-tight">Agreement to Terms</h2>
                         </div>
                         <p className="text-accent-gray leading-relaxed text-lg font-medium opacity-90">
-                            By accessing or using the <span className="text-primary font-bold italic">EduTalks</span> platform, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use our services. These terms apply to all visitors, students, instructors, and others who access the platform.
+                            By accessing or using the <span className="text-primary font-bold italic">LearnPulse</span> platform, you agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, you must not use our services. These terms apply to all visitors, students, instructors, and others who access the platform.
                         </p>
                     </section>
 
@@ -90,7 +90,7 @@ const TermsAndConditions: React.FC = () => {
                             <h2 className="text-2xl lg:text-4xl font-black text-accent-white italic tracking-tight">Intellectual Property</h2>
                         </div>
                         <p className="text-accent-gray leading-relaxed text-lg font-medium opacity-90 mb-6">
-                            The EduTalks platform and its original content (including but not limited to live streams, course materials, whiteboard captures, and tournament structures) are the exclusive property of <span className="text-primary font-bold italic">EduTalks Learning Pvt. Ltd.</span>
+                            The LearnPulse platform and its original content (including but not limited to live streams, course materials, whiteboard captures, and tournament structures) are the exclusive property of <span className="text-primary font-bold italic">LearnPulse Learning Pvt. Ltd.</span>
                         </p>
                         <ul className="space-y-4">
                             <li className="flex gap-4 items-center line-through opacity-50 decoration-primary decoration-2">
@@ -164,7 +164,7 @@ const TermsAndConditions: React.FC = () => {
                             If you have any questions about these Terms and Conditions, please reach out to our legal team.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                            <a href="mailto:contact@edutalks.tech" className="btn-primary min-w-[200px] py-4 text-[10px] font-black uppercase tracking-widest italic shadow-xl shadow-primary/20">
+                            <a href="mailto:contact@learnpulse.tech" className="btn-primary min-w-[200px] py-4 text-[10px] font-black uppercase tracking-widest italic shadow-xl shadow-primary/20">
                                 Email Legal Team
                             </a>
                             <a

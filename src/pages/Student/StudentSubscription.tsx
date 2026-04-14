@@ -36,7 +36,7 @@ const StudentSubscription: React.FC = () => {
                 key: key_id,
                 amount: order_amount,
                 currency: currency,
-                name: 'EduTalks Academy',
+                name: 'LearnPulse Academy',
                 description: `${planName} Subscription`,
                 order_id: order_id,
                 handler: async function (response: any) {

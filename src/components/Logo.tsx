@@ -42,12 +42,12 @@ const Logo: React.FC<LogoProps> = ({ className = '', showIcon = false, size = 'm
         <Link to={path} className={`flex items-center gap-2 select-none hover:opacity-90 transition-opacity ${className}`}>
             {showIcon && (
                 <div className={`${iconSize} rounded-lg bg-primary flex items-center justify-center shadow-lg shadow-primary/20`}>
-                    <span className="text-white font-black text-lg">e</span>
+                    <span className="text-white font-black text-lg">L</span>
                 </div>
             )}
             <div className={`font-sans font-black tracking-tight leading-none ${textSize}`}>
-                <span className="text-primary">edu</span>
-                <span className="text-text-main">talks</span>
+                <span className="text-primary">learn</span>
+                <span className="text-text-main">pulse</span>
             </div>
         </Link>
     );

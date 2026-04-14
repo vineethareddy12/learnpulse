@@ -137,7 +137,7 @@ const Register: React.FC = () => {
                                 type="email" name="email" required
                                 className="w-full"
                                 value={formData.email} onChange={handleChange}
-                                placeholder="aaditya@edutalks.com"
+                                placeholder="aaditya@learnpulse.com"
                             />
                         </div>
 
