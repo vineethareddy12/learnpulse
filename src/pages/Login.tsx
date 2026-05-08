@@ -4,6 +4,7 @@ import { FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../context/AuthContext';
 import api from '../services/api';
 import Logo from '../components/Logo';
+import SEO from '../components/SEO';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -47,6 +48,10 @@ const Login: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-background flex items-center justify-center relative overflow-hidden transition-colors duration-500">
+            <SEO 
+                title="Secure Access | Sign In"
+                description="Log in to your LearnPulse account to access your personalized learning dashboard, live classes, and exams."
+            />
             {/* Theme Toggle Position removed */}
 
             {/* Background Pattern */}

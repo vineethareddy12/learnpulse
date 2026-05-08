@@ -28,6 +28,8 @@ const UserManagement: React.FC = () => {
 
     // Categories State for dynamic dropdown
     const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
+    const [isLoadingCategories, setIsLoadingCategories] = useState(true);
+    const [categoriesError, setCategoriesError] = useState(false);
     const [educationLevel, setEducationLevel] = useState('');
 
     const location = useLocation();
@@ -37,16 +39,20 @@ const UserManagement: React.FC = () => {
         fetchCategories();
         if (location.state?.openCreateModal) {
             setShowModal(true);
-            // Clear state to prevent reopening on refresh (optional, but good practice requires history manipulation which we might skip for simplicity or do: window.history.replaceState({}, document.title) if critical)
         }
     }, [location]);
 
     const fetchCategories = async () => {
+        setIsLoadingCategories(true);
+        setCategoriesError(false);
         try {
             const res = await api.get('/api/classes/categories');
-            setCategories(res.data);
+            setCategories(Array.isArray(res.data) ? res.data : []);
         } catch (err) {
-            console.error("Failed to fetch categories");
+            console.error("Failed to fetch categories", err);
+            setCategoriesError(true);
+        } finally {
+            setIsLoadingCategories(false);
         }
     };
 
@@ -290,12 +296,13 @@ const UserManagement: React.FC = () => {
                                     <div className="space-y-2 animate-fadeIn">
                                         <label className="text-[10px] font-black text-accent-gray uppercase tracking-widest ml-2">Education Level</label>
                                         <select
-                                            className="w-full bg-surface-dark border border-white/5 rounded-2xl p-4 text-accent-white focus:border-primary/50 outline-none transition-all appearance-none cursor-pointer"
+                                            className="w-full bg-surface-dark border border-white/5 rounded-2xl p-4 text-accent-white focus:border-primary/50 outline-none transition-all appearance-none cursor-pointer text-xs font-bold"
                                             value={educationLevel}
                                             onChange={(e) => {
                                                 setEducationLevel(e.target.value);
                                                 setNewUser({ ...newUser, grade: '' }); // Reset grade on level change
                                             }}
+                                            required
                                         >
                                             <option value="">Select Level...</option>
                                             <option value="school">School Education (6th-12th)</option>
@@ -304,37 +311,47 @@ const UserManagement: React.FC = () => {
                                         </select>
                                     </div>
 
-                                    <div className="space-y-2 animate-fadeIn">
+                                    <div className={`space-y-2 transition-all duration-500 ${educationLevel ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}`}>
                                         <label className="text-[10px] font-black text-accent-gray uppercase tracking-widest ml-2">
                                             {newUser.role === 'student' ? (educationLevel === 'school' ? 'Grade / Class' : 'Course / Stream') : (educationLevel === 'school' ? 'Teaching Grade' : 'Teaching Stream')}
                                         </label>
                                         <select
-                                            className="w-full bg-surface-dark border border-white/10 rounded-2xl p-4 text-accent-white focus:border-primary/50 outline-none transition-all appearance-none cursor-pointer shadow-lg shadow-primary/5"
+                                            className="w-full bg-surface-dark border border-white/10 rounded-2xl p-4 text-accent-white focus:border-primary/50 outline-none transition-all appearance-none cursor-pointer shadow-lg shadow-primary/5 text-xs font-bold"
                                             value={newUser.grade || ''}
                                             onChange={e => setNewUser({ ...newUser, grade: e.target.value })}
-                                            disabled={!educationLevel}
+                                            disabled={!educationLevel || isLoadingCategories}
+                                            required={!!educationLevel}
                                         >
-                                            <option value="">Select Option...</option>
-                                            {categories
-                                                .filter(c => {
-                                                    const schoolGradePrefixes = ['6th', '7th', '8th', '9th', '10th', '11th', '12th'];
+                                            {isLoadingCategories ? (
+                                                <option value="">Syncing Ecosystem...</option>
+                                            ) : categoriesError ? (
+                                                <option value="">Error fetching options</option>
+                                            ) : (
+                                                <>
+                                                    <option value="">Select Option...</option>
+                                                    {categories
+                                                        .filter(c => {
+                                                            if (!c.name) return false;
+                                                            const schoolGradePrefixes = ['6th', '7th', '8th', '9th', '10th', '11th', '12th'];
 
-                                                    if (educationLevel === 'school') {
-                                                        return schoolGradePrefixes.some(prefix => c.name.startsWith(prefix));
-                                                    } else if (educationLevel === 'ug') {
-                                                        return c.name.startsWith('UG -');
-                                                    } else if (educationLevel === 'pg') {
-                                                        return c.name.startsWith('PG -');
+                                                            if (educationLevel === 'school') {
+                                                                return schoolGradePrefixes.some(prefix => c.name.startsWith(prefix));
+                                                            } else if (educationLevel === 'ug') {
+                                                                return c.name.startsWith('UG -');
+                                                            } else if (educationLevel === 'pg') {
+                                                                return c.name.startsWith('PG -');
+                                                            }
+                                                            return false;
+                                                        })
+                                                        .filter(c => c.name && c.name.trim() !== '' && !c.name.toLowerCase().includes('select option'))
+                                                        .filter((c, index, self) => index === self.findIndex(t => t.name === c.name))
+                                                        .sort((a, b) => (a.name || '').localeCompare(b.name || ''))
+                                                        .map((cat) => (
+                                                            <option key={cat.id} value={cat.name}>{cat.name}</option>
+                                                        ))
                                                     }
-                                                    return false;
-                                                })
-                                                .filter(c => c.name && c.name.trim() !== '' && !c.name.toLowerCase().includes('select option'))
-                                                .filter((c, index, self) => index === self.findIndex(t => t.name === c.name))
-                                                .sort((a, b) => a.name.localeCompare(b.name))
-                                                .map((cat) => (
-                                                    <option key={cat.id} value={cat.name}>{cat.name}</option>
-                                                ))
-                                            }
+                                                </>
+                                            )}
                                         </select>
                                     </div>
                                 </>

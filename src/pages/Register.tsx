@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import { FaEye, FaEyeSlash, FaArrowLeft, FaCheckCircle } from 'react-icons/fa';
 import Logo from '../components/Logo';
+import SEO from '../components/SEO';
 
 const Register: React.FC = () => {
     const navigate = useNavigate();
@@ -17,6 +18,8 @@ const Register: React.FC = () => {
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
+    const [isLoadingCategories, setIsLoadingCategories] = useState(true);
+    const [categoriesError, setCategoriesError] = useState(false);
 
     const [showSuccess, setShowSuccess] = useState(false);
 
@@ -24,11 +27,16 @@ const Register: React.FC = () => {
 
     useEffect(() => {
         const fetchCategories = async () => {
+            setIsLoadingCategories(true);
+            setCategoriesError(false);
             try {
                 const res = await api.get('/api/classes/categories');
-                setCategories(res.data);
+                setCategories(Array.isArray(res.data) ? res.data : []);
             } catch (err) {
-                console.error("Failed to fetch categories");
+                console.error("Failed to fetch categories", err);
+                setCategoriesError(true);
+            } finally {
+                setIsLoadingCategories(false);
             }
         };
         fetchCategories();
@@ -40,26 +48,29 @@ const Register: React.FC = () => {
     };
 
     const getFilteredCategories = () => {
-        if (!educationLevel) return [];
+        if (!educationLevel || !categories.length) return [];
         const schoolGradePrefixes = ['6th', '7th', '8th', '9th', '10th', '11th', '12th'];
 
         let filtered = [];
         if (educationLevel === 'school') {
-            filtered = categories.filter(c => schoolGradePrefixes.some(prefix => c.name.startsWith(prefix)));
+            filtered = categories.filter(c => c.name && schoolGradePrefixes.some(prefix => c.name.startsWith(prefix)));
         } else if (educationLevel === 'ug') {
-            filtered = categories.filter(c => c.name.startsWith('UG -'));
+            filtered = categories.filter(c => c.name && c.name.startsWith('UG -'));
         } else if (educationLevel === 'pg') {
-            filtered = categories.filter(c => c.name.startsWith('PG -'));
+            filtered = categories.filter(c => c.name && c.name.startsWith('PG -'));
         } else {
-            filtered = categories.filter(c => !schoolGradePrefixes.some(prefix => c.name.startsWith(prefix)));
+            // Default fallback for any other level
+            filtered = categories.filter(c => c.name && !schoolGradePrefixes.some(prefix => c.name.startsWith(prefix)));
         }
 
         filtered = filtered.filter(c => c.name && c.name.trim() !== '' && !c.name.toLowerCase().includes('select option'));
+        
+        // Deduplicate by name
         filtered = filtered.filter((c, index, self) =>
             index === self.findIndex(t => t.name === c.name)
         );
 
-        return filtered.sort((a, b) => a.name.localeCompare(b.name));
+        return filtered.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -75,6 +86,10 @@ const Register: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-background flex items-center justify-center p-4 relative overflow-hidden transition-colors duration-500">
+            <SEO 
+                title="Join LearnPulse | Create Your Account"
+                description="Start your learning journey with LearnPulse. Register now to access live classes, interactive exams, and expert mentorship."
+            />
             {/* Theme Toggle Position removed */}
 
             {/* Background Pattern */}
@@ -152,19 +167,19 @@ const Register: React.FC = () => {
                         </div>
 
                         {(formData.role === 'student' || formData.role === 'instructor' || formData.role === 'super_instructor') && (
-                            <>
-                                {/* Education Level Selection - NEW */}
-                                <div className="space-y-3 animate-slideIn">
+                            <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-surface-border/30">
+                                {/* Education Level Selection */}
+                                <div className="space-y-3">
                                     <label className="block text-[10px] font-black text-accent-gray uppercase tracking-widest ml-1">
                                         Education Level
                                     </label>
                                     <select
                                         name="educationLevel"
-                                        className="w-full"
+                                        className="w-full text-xs font-bold"
                                         value={educationLevel}
                                         onChange={(e) => {
                                             setEducationLevel(e.target.value);
-                                            setFormData({ ...formData, grade: '' }); // Reset selections
+                                            setFormData({ ...formData, grade: '' });
                                         }}
                                         required={formData.role === 'student'}
                                     >
@@ -176,24 +191,33 @@ const Register: React.FC = () => {
                                 </div>
 
                                 {/* Filtered Category Selection */}
-                                <div className="space-y-3">
+                                <div className={`space-y-3 transition-all duration-500 ${educationLevel ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
                                     <label className="block text-[10px] font-black text-accent-gray uppercase tracking-widest ml-1">
                                         {educationLevel === 'school' ? 'Grade / Class' : 'Stream Category'}
                                     </label>
                                     <select
                                         name="grade"
-                                        className="w-full"
+                                        className="w-full text-xs font-bold"
                                         value={formData.grade}
                                         onChange={handleChange}
-                                        disabled={!educationLevel}
+                                        disabled={!educationLevel || isLoadingCategories}
+                                        required={!!educationLevel && formData.role === 'student'}
                                     >
-                                        <option value="">Select Option...</option>
-                                        {getFilteredCategories().map((cat) => (
-                                            <option key={cat.id} value={cat.name}>{cat.name}</option>
-                                        ))}
+                                        {isLoadingCategories ? (
+                                            <option value="">Syncing Ecosystem...</option>
+                                        ) : categoriesError ? (
+                                            <option value="">Error fetching options</option>
+                                        ) : (
+                                            <>
+                                                <option value="">Select Option...</option>
+                                                {getFilteredCategories().map((cat) => (
+                                                    <option key={cat.id} value={cat.name}>{cat.name}</option>
+                                                ))}
+                                            </>
+                                        )}
                                     </select>
                                 </div>
-                            </>
+                            </div>
                         )}
 
 

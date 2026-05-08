@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /super-admin/
+Disallow: /admin/
+Disallow: /instructor/
+Disallow: /student/
+Disallow: /super-instructor/
+
+Sitemap: https://edutalks.com/sitemap.xml

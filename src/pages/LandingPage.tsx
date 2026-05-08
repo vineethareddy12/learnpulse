@@ -4,6 +4,7 @@ import { FaVideo, FaChalkboardTeacher, FaChartLine, FaUserShield, FaCheckCircle,
 import ThemeToggle from '../components/ThemeToggle';
 import { useState } from 'react';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 
 const LandingPage: React.FC = () => {
@@ -13,6 +14,12 @@ const LandingPage: React.FC = () => {
 
     return (
         <div className="font-sans text-accent-white bg-surface-dark min-h-screen relative overflow-x-hidden transition-colors duration-500">
+            <SEO 
+                title="Master Your Future | Elite Learning Platform"
+                description="Experience the classroom of tomorrow with LearnPulse. Join India's #1 Live Learning platform for young achievers in AI, Data Science, and Academics."
+                keywords="online coaching, live classes, AI learning, school academics, JEE prep, NEET prep, LearnPulse"
+                ogUrl="https://edutalks.com/"
+            />
             {/* Background Pattern Layer */}
             <div className="fixed inset-0 bg-pattern-dark pointer-events-none -z-10"></div>
 
